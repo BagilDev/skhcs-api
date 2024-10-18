@@ -1,0 +1,6 @@
+# 실행할 명령어를 가져오는 주기 (초 단위)
+delay: 30
+
+login-id: test
+key: aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+port: 25565
