@@ -50,6 +50,8 @@ class PostRunnable(
         val body = Json.decodeFromString<Body>(response.body())
         val commands = body.commands.map { it.split(" ").drop(1).joinToString(" ") }.filterNot { it.isBlank() }
         commands.forEach { server.dispatchCommand(server.consoleSender, it) }
-        server.consoleSender.sendMessage(String.format("§6§l[SKHCS] §e%s개의 명령어가 처리되었습니다.", commands.size))
+        if (config.getBoolean("debug")) {
+            server.consoleSender.sendMessage(String.format("§6§l[SKHCS] §e%s개의 명령어가 처리되었습니다.", commands.size))
+        }
     }
 }

@@ -1,5 +1,7 @@
 # 실행할 명령어를 가져오는 주기 (초 단위)
 delay: 30
+# 명령어 실행 시 콘솔 메시지 여부
+debug: false
 
 login-id: test
 key: aaaaaaaaaaaaaaaaaaaaaaaaaaaa
