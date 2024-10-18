@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "kr.mcv.bagil"
-version = "0.1-SNAPSHOT"
+version = "0.1.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
