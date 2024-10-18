@@ -33,14 +33,17 @@ class PostRunnable(
         when {
             response.body().contains("data_required") -> {
                 server.consoleSender.sendMessage("§6§l[SKHCS] §c입력된 API 키와 아이디가 불일치 합니다.")
+                return
             }
 
             response.body().contains("wrong_data") -> {
                 server.consoleSender.sendMessage("§6§l[SKHCS] §cAPI 키, 아이디, 포트를 다시 확인해주세요.")
+                return
             }
 
             response.body().contains("ip_denied") -> {
                 server.consoleSender.sendMessage("§6§l[SKHCS] §c사이트에 아이피 포트를 입력해주세요.")
+                return
             }
         }
 
