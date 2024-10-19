@@ -8,6 +8,6 @@ class SkhcsApi : JavaPlugin() {
     override fun onEnable() {
         saveDefaultConfig()
         Bukkit.getScheduler()
-            .scheduleSyncRepeatingTask(this, PostRunnable(server, config), 0L, 20L * config.getLong("delay"))
+            .runTaskTimerAsynchronously(this, PostRunnable(this), 0L, 20L * config.getLong("delay"))
     }
 }

@@ -1,4 +1,4 @@
 name: skhcs-api
-version: '0.1.1-SNAPSHOT'
+version: '0.2-SNAPSHOT'
 main: kr.mcv.bagil.skhcsApi.SkhcsApi
 api-version: '1.20'

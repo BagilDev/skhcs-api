@@ -1,17 +1,20 @@
 package kr.mcv.bagil.skhcsApi
 
 import kotlinx.serialization.json.Json
-import org.bukkit.Server
-import org.bukkit.configuration.file.FileConfiguration
+import org.bukkit.plugin.java.JavaPlugin
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpRequest.BodyPublishers
 import java.net.http.HttpResponse.BodyHandlers
+import java.util.concurrent.Callable
 
 class PostRunnable(
-    private val server: Server, private val config: FileConfiguration
+    private val plugin: JavaPlugin
 ) : Runnable {
+
+    private val config = plugin.config
+    private val server = plugin.server
 
     override fun run() {
         val client = HttpClient.newHttpClient()
@@ -49,7 +52,11 @@ class PostRunnable(
 
         val body = Json.decodeFromString<Body>(response.body())
         val commands = body.commands.map { it.split(" ").drop(1).joinToString(" ") }.filterNot { it.isBlank() }
-        commands.forEach { server.dispatchCommand(server.consoleSender, it) }
+        commands.forEach {
+            plugin.server.scheduler.callSyncMethod(
+                plugin,
+                Callable { server.dispatchCommand(server.consoleSender, it) })
+        }
         if (config.getBoolean("debug")) {
             server.consoleSender.sendMessage(String.format("§6§l[SKHCS] §e%s개의 명령어가 처리되었습니다.", commands.size))
         }
